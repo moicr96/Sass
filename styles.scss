@@ -1,0 +1,79 @@
+// para comentar se utiliza el doble diagonal o el comando ctrl+7 (no el 7 del teclado numérico) en visual studio code
+
+//primero hay que hacer el archivo html
+//2. hacer el archivo sass/scss
+//3. abrir el cmd o linea de comandos en la carpeta donde esta el archivo sass/scss ejecutar el comando siguiente:
+    //sass --watch [archivoorigen.scss] [archivodestino.css] , en este caso de ejemplo quedaría como sigue:
+    //sass --watch styles.scss styles.css
+    //esto es para compilar el archivo y que el html pueda usarlo
+
+//4. linkear en el html con la etiqueta link el archivo css basando en al archivo sass/scss
+
+
+//en archivos .scss a diferencia de archivos .sass se puede redactar el contenido del archivo al estilo de css con llaves 
+
+
+@use 'modulo1'; //los modulos se escriben antes del resto del código
+
+//EN SASS HAY VARIABLES!
+$color-principal: #1c9791;
+$color-letra: #9c217f;
+
+
+body{
+    background: $color-principal;
+}
+
+h1{
+    color: $color-letra;
+}
+
+p{
+    color: $color-letra;
+}
+
+
+//TAMBIÉN HAY ANIDACIONES!
+.caja{
+    h2{
+        color: black;
+        font-family: Arial;
+    }
+
+    p{
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        text-decoration: underline;
+    }
+}
+
+
+//INCLUSO HAY MÓDULOS
+//ARCHIVOS APARTE DONDE HAY CÓDIGO DE SASS QUE A SU VEZ PUEDEN USARSE EN OTROS ARCHIVOS
+//SOLO HAY QUE:
+//1.hacer otro archivo de sass/scss pero que el primer caracter del nombre del archivo sea guion bajo (ejemplo: _modulo1.scss)
+//2. invocarlo en otro archivo sass/scss usando la sintaxis @use '[modulo.sass]'; por ejemplo: @use 'modulo1'; 
+    //se debe poner al principio del archivo, antes del resto del codigo sass
+
+
+//MIXINS
+//que son como una serie de caracteristicas que se las puedes dotar luego a elementos del html
+@mixin caja_personalizada($fondo: white, $color: yellow){
+    background-color: $fondo;
+    border:4px solid $color;
+    box-shadow: 2px 2px 2px black;
+    margin: 20px;
+}
+
+.caja2{
+    @include caja_personalizada()
+}
+
+.caja3{
+    @include caja_personalizada($fondo: gray, $color: blue)
+}
+
+//OPERADORES
+//se pueden hacer operaciones matemáticas
+.caja2, .caja3{
+    width: 400px + 100px;
+}
